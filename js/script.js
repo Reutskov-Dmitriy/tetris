@@ -29,13 +29,20 @@ const brick = {
 		[2, 2, 2],
 		[0, 0, 0],
 	],
-	y: 7,
-	x: 7,
+	y: 3,
+	x: 4,
 }
 
-// tick()
+tick()
 
 render()
+
+onkeydown = (e) => {
+	if (e.key === 'ArrowLeft') tryMove(-1, 0);
+	else if (e.key === 'ArrowRight') tryMove(1, 0);
+	else if (e.key === 'ArrowDown') tryMove(0, 1);
+
+}
 
 function render() {
 	state.forEach((row, y) => row.forEach((i, x) => {
@@ -48,22 +55,38 @@ function render() {
 }
 
 function tick() {
+	brick.y++;
+
 	if (doesCollide()) {
+		brick.y--;
 
 	} else {
-		brick.y += 1;
 	}
-	render()
+	render();
 
-	setTimeout(tick, 1000)
+	setTimeout(tick, 1000);
 }
 
 function doesCollide() {
 	return brick.state.some((row, y) => row.some((i, x) => {
-		return i && state[y + brick.y]?.[x + brick.x]
+		return i && state[y + brick.y]?.[x + brick.x];
 	})) || brick.state.some((row, y) => row.some((i, x) => {
 		return i &&
-			(y + brick.y < 0 || y + brick.y > 19 || x + brick.x < 0 || x + brick.x > 9)
+			(y + brick.y < 0 || y + brick.y > 19 || x + brick.x < 0 || x + brick.x > 9);
 	}));
 }
+
+function move(x, y) {
+	brick.x += x;
+	brick.y += y;
+}
+
+function tryMove(x, y) {
+	move(x, y);
+	if (doesCollide()) move(-x, -y);
+	render();
+}
+
+
+
 
