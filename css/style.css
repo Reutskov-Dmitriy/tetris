@@ -1,0 +1,44 @@
+body {
+	padding: 10vh 0;
+	background-color: #333;
+}
+
+.red {
+	background-color: red;
+}
+
+.green {
+	background-color: green;
+}
+
+.yellow {
+	background-color: yellow;
+}
+
+.orange {
+	background-color: orange;
+}
+
+.blue {
+	background-color: blue;
+}
+
+.magenta {
+	background-color: magenta;
+}
+
+.cyan {
+	background-color: cyan;
+}
+
+#board {
+	margin: 0 auto;
+	border: 1px solid #bbb;
+	border-collapse: collapse;
+}
+
+#board td {
+	border: 1px solid #bbb;
+	width: 4vh;
+	height: 4vh;
+}
