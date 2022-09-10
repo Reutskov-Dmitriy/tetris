@@ -1,5 +1,5 @@
 const board = document.getElementById('board');
-const colors = ['', 'yellow', 'orange', 'red', 'magente', 'blue', 'cyan', 'green'];
+const colors = ['', 'yellow', 'orange', 'red', 'magenta', 'blue', 'cyan', 'green'];
 const state = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -59,7 +59,8 @@ function tick() {
 
 	if (doesCollide()) {
 		brick.y--;
-
+		stopBrick();
+		getNewBrick();
 	} else {
 	}
 	render();
@@ -87,6 +88,23 @@ function tryMove(x, y) {
 	render();
 }
 
+function stopBrick() {
+	brick.state.forEach((row, y) => row.forEach((i, x) => {
+		if (i) state[y + brick.y][x + brick.x] = i;
+	}))
+}
+
+function getNewBrick() {
+	Object.assign(brick, {
+		state: [
+			[0, 4, 0],
+			[4, 4, 4],
+			[0, 0, 0],
+		],
+		y: 0,
+		x: 4,
+	})
+}
 
 
 
