@@ -82,8 +82,8 @@ const state = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-	[0, 0, 0, 0, 1, 1, 0, 0, 0, 0,],
-	[6, 6, 6, 0, 1, 1, 0, 0, 0, 0,],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
@@ -101,7 +101,7 @@ const brick = {
 		[2, 2, 2],
 		[0, 0, 0],
 	],
-	y: 3,
+	y: 0,
 	x: 4,
 }
 
@@ -114,6 +114,7 @@ onkeydown = (e) => {
 	if (e.key === 'ArrowLeft') tryMove(-1, 0);
 	else if (e.key === 'ArrowRight') tryMove(1, 0);
 	else if (e.key === 'ArrowDown') tryMove(0, 1);
+	else if (e.key === ' ' || e.key === 'ArrowUp') tryRotate();
 
 }
 
@@ -175,3 +176,27 @@ function random(num) {
 	return Math.floor(Math.random() * num);
 }
 
+function rotate() {
+	brick.state = rotateArr(brick.state);
+}
+
+function tryRotate() {
+	const previousState = brick.state;
+	rotate();
+	if (doesCollide()) brick.state = previousState;
+	render();
+}
+
+function rotateArr(arr) {
+	const newArr = [];
+
+	for (let i = 0; i < arr.length; i++) {
+		newArr.push([])
+
+		for (let j = 0; j < arr[i].length; j++) {
+			newArr[i][j] = arr[arr[i].length - 1 - j][i]
+		}
+	}
+
+	return newArr
+}
