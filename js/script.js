@@ -92,7 +92,7 @@ const state = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+	[1, 1, 0, 1, 1, 1, 1, 1, 1, 1,],
 ]
 
 const brick = {
@@ -126,6 +126,7 @@ function render() {
 	brick.state.forEach((row, y) => row.forEach((i, x) => {
 		if (i) board.rows[y + brick.y].cells[x + brick.x].className = colors[i]
 	}))
+
 }
 
 function tick() {
@@ -134,11 +135,13 @@ function tick() {
 	if (doesCollide()) {
 		brick.y--;
 		stopBrick();
+		console.log(state)
+
+		cleanLine(state);
+		// finishGame();
 		getNewBrick();
-	} else {
 	}
 	render();
-
 	setTimeout(tick, 1000);
 }
 
@@ -169,7 +172,8 @@ function stopBrick() {
 }
 
 function getNewBrick() {
-	Object.assign(brick, bricks[random(bricks.length)]);
+	Object.assign(brick, bricks[random(bricks.length)])
+
 }
 
 function random(num) {
@@ -179,6 +183,7 @@ function random(num) {
 function rotate() {
 	brick.state = rotateArr(brick.state);
 }
+
 
 function tryRotate() {
 	const previousState = brick.state;
@@ -200,3 +205,30 @@ function rotateArr(arr) {
 
 	return newArr
 }
+
+function finishGame() {
+
+	{
+		return alert('Game Over')
+
+	}
+}
+
+function cleanLine(arr) {
+
+
+	for (let i = arr.length - 1; i >= 0; i--) {
+		const newArr = [];
+
+		for (let j = 0; j < arr[i].length - 1; j++) {
+			if (arr[i][j] > 0) {
+				newArr.push(arr[i][j])
+			}
+		}
+		if (newArr.length == arr[i].length) {
+			arr.pop && arr.unshift(0)
+		}
+	}
+
+}
+
