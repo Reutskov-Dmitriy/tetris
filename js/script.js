@@ -1,4 +1,7 @@
-const board = document.getElementById('board');
+const board = document.querySelector('.tetris__board');
+const line = document.querySelector('.tetris__lines');
+const score = document.querySelector('.tetris__score');
+
 const colors = ['', 'yellow', 'orange', 'red', 'magenta', 'blue', 'cyan', 'green'];
 const bricks = [
 	{
@@ -135,8 +138,6 @@ function tick() {
 	if (doesCollide()) {
 		brick.y--;
 		stopBrick();
-		console.log(state)
-
 		cleanLine(state);
 		// finishGame();
 		getNewBrick();
@@ -206,28 +207,30 @@ function rotateArr(arr) {
 	return newArr
 }
 
-function finishGame() {
+// function finishGame() {
 
-	{
-		return alert('Game Over')
+// 	{
+// 		return alert('Game Over')
 
-	}
-}
+// 	}
+// }
 
 function cleanLine(arr) {
-
 
 	for (let i = arr.length - 1; i >= 0; i--) {
 		const newArr = [];
 
-		for (let j = 0; j < arr[i].length - 1; j++) {
+		for (let j = 0; j < arr[i].length; j++) {
 			if (arr[i][j] > 0) {
 				newArr.push(arr[i][j])
 			}
 		}
-		if (newArr.length == arr[i].length) {
-			arr.pop && arr.unshift(0)
+
+		if (newArr.length == arr[0].length) {
+			arr[i].splice(0, arr[i].length) && arr.filter(x => x !== []) && arr.unshift()
+			render()
 		}
+
 	}
 
 }

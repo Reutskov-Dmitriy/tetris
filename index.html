@@ -6,22 +6,53 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/style.css">
+
 	<script defer src="js/script.js"></script>
 	<title>Tetris</title>
 </head>
 
 <body>
-	<table id="board">
-		<tbody>
-			<script>
-				document.write(`<tr>${'<td></td>'.repeat(10)}</tr>`.repeat(20));
-				document.currentScript.remove();
-			</script>
-		</tbody>
+	<div class="tetris__row">
+		<table class="tetris__board">
+			<tbody>
+				<script>
+					document.write(`<tr>${'<td></td>'.repeat(10)}</tr>`.repeat(20));
+					document.currentScript.remove();
+				</script>
+			</tbody>
 
-	</table>
+		</table>
+		<fieldset class="tetris__info">
+			<div class="tetris__column">
+				<figure class="tetris__figure"></figure>
+				<div class="tetris__date">
+					<label for="tetris__level">level</label> <input class="tetris__level" type="text">
+				</div>
+				<div class="tetris__date">
+					<label for="tetris__lines">lines</label> <input class="tetris__lines" type="text">
+				</div>
+				<div class="tetris__date">
+					<label for="tetris__score">score</label> <input class="tetris__score" type="text">
+				</div>
+				<div class="tetris__buttons">
+					<button class=" tetris__start btn">start</button>
+					<button class=" tetris__pause btn">pause</button>
+				</div>
+				<h1 class="tetris__title">tetris</h1>
+			</div>
+		</fieldset>
+	</div>
+	<section class="tetris__nav">
+		<button class="nav__btn">down</button>
+		<button class="nav__btn">left</button>
+		<button class="nav__btn">right</button>
+		<button class="nav__btn"> turn</button>
+	</section>
 
 </body>
 

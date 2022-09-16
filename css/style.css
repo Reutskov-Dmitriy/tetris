@@ -1,6 +1,8 @@
 body {
-	padding: 10vh 0;
+	padding: 5vh 0;
 	background-color: #333;
+	color: #bbb;
+	font-family: 'Arial', serif;
 }
 
 .red {
@@ -31,14 +33,148 @@ body {
 	background-color: cyan;
 }
 
-#board {
-	margin: 0 auto;
-	border: 1px solid #bbb;
-	border-collapse: collapse;
+
+.tetris__row {
+	display: flex;
+	justify-content: center;
 }
 
-#board td {
+.tetris__board {
+	border: 1px solid #bbb;
+	border-collapse: collapse;
+	flex: 0 1 30%;
+}
+
+.tetris__board td {
 	border: 1px solid #bbb;
 	width: 4vh;
 	height: 4vh;
+}
+
+.tetris__info {
+	flex: 0 1 15%;
+	max-width: 20vw;
+	padding: 3vw;
+}
+
+.tetris__column {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+
+}
+
+.tetris__figure {
+	flex: 1 1 20%;
+	border: 1px solid #bbb;
+
+}
+
+.tetris__date {
+	flex: 1 1 10%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	font-size: 2rem;
+}
+
+.tetris__date input {
+	height: 50%;
+	width: 40%;
+	font-size: 1.5rem;
+}
+
+.tetris__buttons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex: 1 1 10%;
+
+}
+
+.btn {
+	display: block;
+	height: 50%;
+	width: 30%;
+	color: rgb(32, 129, 240);
+	font-family: 'Arial', serif;
+	font-size: 1rem;
+	border-radius: 1vw;
+	border: none;
+	transition: 1s;
+
+}
+
+.btn:hover {
+	border: 2px solid rgb(32, 129, 240);
+}
+
+.tetris__title {
+	flex: 1 1 20%;
+	display: flex;
+	align-items: flex-end;
+	font-family: 'Press Start 2P', cursive;
+	font-size: 2.5rem;
+}
+
+.tetris__nav {
+	margin-top: 2vw;
+	display: flex;
+	justify-content: center;
+	gap: 3vw;
+	height: 5vh;
+}
+
+.nav__btn {
+	height: 100%;
+	flex: 0 1 10%;
+
+}
+
+@media (max-width: 400px) {
+	body {
+		padding: 2vh;
+	}
+
+	.tetris__board {
+		flex: 0 1 60%;
+	}
+
+	.tetris__date input {
+		height: 50%;
+		width: 50%;
+		font-size: 1rem;
+	}
+
+
+	.tetris__buttons {
+		flex: 1 1 20%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.btn {
+		font-size: auto;
+		width: 50%;
+		height: 30%;
+	}
+
+	.tetris__title {
+		flex: 1 1 10%;
+		font-size: 1rem;
+	}
+
+	.tetris__date {
+		flex: 1 1 10%;
+		font-size: 1rem;
+	}
+
+	.tetris__nav button {
+		height: 100%;
+		flex: 0 1 25%;
+	}
+
 }
