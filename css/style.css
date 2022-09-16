@@ -42,7 +42,7 @@ body {
 .tetris__board {
 	border: 1px solid #bbb;
 	border-collapse: collapse;
-	flex: 0 1 30%;
+	flex: 0 1 25%;
 }
 
 .tetris__board td {
@@ -123,17 +123,17 @@ body {
 	margin-top: 2vw;
 	display: flex;
 	justify-content: center;
-	gap: 3vw;
+	gap: 5vw;
 	height: 5vh;
 }
 
 .nav__btn {
 	height: 100%;
-	flex: 0 1 10%;
+	flex: 0 1 8%;
 
 }
 
-@media (max-width: 400px) {
+@media (max-width: 900px) {
 	body {
 		padding: 2vh;
 	}
@@ -174,7 +174,7 @@ body {
 
 	.tetris__nav button {
 		height: 100%;
-		flex: 0 1 25%;
+		flex: 0 1 20%;
 	}
 
 }
