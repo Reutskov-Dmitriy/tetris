@@ -1,6 +1,10 @@
 const board = document.querySelector('.tetris__board');
 const line = document.querySelector('.tetris__lines');
 const score = document.querySelector('.tetris__score');
+const down = document.getElementById('down');
+const left = document.getElementById('left');
+const right = document.getElementById('right');
+const rotateRight = document.getElementById('rotate');
 
 const colors = ['', 'yellow', 'orange', 'red', 'magenta', 'blue', 'cyan', 'green'];
 const bricks = [
@@ -120,6 +124,24 @@ onkeydown = (e) => {
 	else if (e.key === ' ' || e.key === 'ArrowUp') tryRotate();
 
 }
+
+left.onclick = () => {
+	tryMove(-1, 0);
+}
+right.onclick = () => {
+	tryMove(1, 0);
+}
+
+rotateRight.onclick = () => {
+	tryRotate();
+}
+
+down.onclick = () => {
+	tryMove(0, 1);
+}
+
+
+
 
 function render() {
 	state.forEach((row, y) => row.forEach((i, x) => {
