@@ -42,7 +42,7 @@ body {
 .tetris__board {
 	border: 1px solid #bbb;
 	border-collapse: collapse;
-	flex: 0 1 25%;
+	flex: 0 1 20%;
 }
 
 .tetris__board td {
@@ -52,8 +52,7 @@ body {
 }
 
 .tetris__info {
-	flex: 0 1 15%;
-	max-width: 20vw;
+	flex: 0 1 10%;
 	padding: 3vw;
 }
 
@@ -62,21 +61,20 @@ body {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 
 }
 
 .tetris__figure {
-	flex: 1 1 20%;
+	flex: 0 1 20%;
 	border: 1px solid #bbb;
-
 }
 
 .tetris__date {
-	flex: 1 1 10%;
+	flex: 0 1 10%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
 	font-size: 2rem;
 }
 
@@ -86,12 +84,27 @@ body {
 	font-size: 1.5rem;
 }
 
+.tetris__date span {
+	display: inline-block;
+	padding: 5px;
+	height: 50%;
+	width: 40%;
+	font-size: 1rem;
+	color: #333;
+	background-color: white;
+}
+
+
 .tetris__buttons {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	flex: 1 1 10%;
+	flex: 0 1 15%;
 
+}
+
+.tetris__buttons button {
+	width: 70px;
 }
 
 .btn {
@@ -112,19 +125,19 @@ body {
 }
 
 .tetris__title {
-	flex: 1 1 20%;
+	flex: 0 1 15%;
 	display: flex;
 	align-items: flex-end;
 	font-family: 'Press Start 2P', cursive;
-	font-size: 2.5rem;
-	line-height: 2rem;
+	font-size: 1.5rem;
+	line-height: 1.5;
 }
 
 .tetris__nav {
 	margin-top: 2vw;
 	display: flex;
 	justify-content: center;
-	gap: 5vw;
+	gap: 3vw;
 	height: 5vh;
 }
 
@@ -150,8 +163,9 @@ body {
 	}
 
 
+
 	.tetris__buttons {
-		flex: 1 1 20%;
+		flex: 0 1 20%;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -164,12 +178,12 @@ body {
 	}
 
 	.tetris__title {
-		flex: 1 1 10%;
+		flex: 0 1 10%;
 		font-size: 1rem;
 	}
 
 	.tetris__date {
-		flex: 1 1 10%;
+		flex: 0 1 10%;
 		font-size: 1rem;
 	}
 

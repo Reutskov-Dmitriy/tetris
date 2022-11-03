@@ -17,6 +17,12 @@
 </head>
 
 <body>
+	<div class="finish-game">
+		<p class="finish-game__title">
+			Game Over
+		</p>
+		n
+	</div>
 	<div class="tetris__row">
 		<table class="tetris__board">
 			<tbody>
@@ -31,13 +37,13 @@
 			<div class="tetris__column">
 				<figure class="tetris__figure"></figure>
 				<div class="tetris__date">
-					<label for="tetris__level">level</label> <input class="tetris__level" type="text">
+					<label for="tetris__level">level</label> <span class="tetris__level"></span>
 				</div>
 				<div class="tetris__date">
-					<label for="tetris__lines">lines</label> <input class="tetris__lines" type="text">
+					<label for="tetris__lines">lines</label> <span class="tetris__lines"></span>
 				</div>
 				<div class="tetris__date">
-					<label for="tetris__score">score</label> <input class="tetris__score" type="text">
+					<label for="tetris__score">score</label> <span class="tetris__score"></span>
 				</div>
 				<div class="tetris__buttons">
 					<button class=" tetris__start btn">start</button>
@@ -48,10 +54,10 @@
 		</fieldset>
 	</div>
 	<section class="tetris__nav">
-		<button id="down" class="nav__btn btn">down</button>
 		<button id="left" class="nav__btn btn">left</button>
-		<button id="right" class="nav__btn btn">right</button>
 		<button id="rotate" class="nav__btn btn"> rotate</button>
+		<button id="right" class="nav__btn btn">right</button>
+		<button id="down" class="nav__btn btn">down</button>
 	</section>
 
 </body>

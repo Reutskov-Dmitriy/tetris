@@ -1,11 +1,17 @@
 const board = document.querySelector('.tetris__board');
-const line = document.querySelector('.tetris__lines');
-const score = document.querySelector('.tetris__score');
+const inputLevel = document.querySelector('.tetris__level');
+const inputLines = document.querySelector('.tetris__lines');
+const inputScore = document.querySelector('.tetris__score');
 const down = document.getElementById('down');
 const left = document.getElementById('left');
 const right = document.getElementById('right');
 const rotateRight = document.getElementById('rotate');
-
+const btnStart = document.querySelector('.tetris__start');
+const btnPause = document.querySelector('.tetris__pause');
+let amountLine;
+let level = 1;
+let lines = 0;
+let score = 0;
 const colors = ['', 'yellow', 'orange', 'red', 'magenta', 'blue', 'cyan', 'green'];
 const bricks = [
 	{
@@ -99,7 +105,7 @@ const state = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-	[1, 1, 0, 1, 1, 1, 1, 1, 1, 1,],
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
 ]
 
 const brick = {
@@ -112,10 +118,17 @@ const brick = {
 	x: 4,
 }
 
+btnStart.onclick = start;
 
-tick()
+function start() {
+	inputLevel.innerHTML = level;
+	tick();
+	render();
+}
 
-render()
+function pause() {
+
+}
 
 onkeydown = (e) => {
 	if (e.key === 'ArrowLeft') tryMove(-1, 0);
@@ -161,7 +174,7 @@ function tick() {
 		brick.y--;
 		stopBrick();
 		cleanLine(state);
-		// finishGame();
+		finishGame(state);
 		getNewBrick();
 	}
 	render();
@@ -229,31 +242,45 @@ function rotateArr(arr) {
 	return newArr
 }
 
-// function finishGame() {
-
-// 	{
-// 		return alert('Game Over')
-
-// 	}
-// }
-
-function cleanLine(arr) {
-
-	for (let i = arr.length - 1; i >= 0; i--) {
-		const newArr = [];
-
-		for (let j = 0; j < arr[i].length; j++) {
-			if (arr[i][j] > 0) {
-				newArr.push(arr[i][j])
-			}
-		}
-
-		if (newArr.length == arr[0].length) {
-			arr[i].splice(0, arr[i].length) && arr.filter(x => x !== []) && arr.unshift()
-			render()
-		}
+function finishGame(arr) {
+	if (arr[0].some(x => x > 0)) {
+		return alert('Game Over')
 
 	}
-
 }
 
+function cleanLine(arr) {
+	amountLine = 0;
+	for (let i = arr.length - 1; i >= 0; i--) {
+
+		if (arr[i].every(x => x > 0)) {
+			arr.splice(i, 1) && arr.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+			amountLine += 1;
+			i = arr.length;
+			sumLines(amountLine)
+		}
+	}
+	countingScore();
+	render()
+
+
+}
+function sumLines(num) {
+	inputLines.innerHTML = lines += num;
+}
+
+function countingScore() {
+	if (amountLine === 1) {
+		inputScore.innerHTML = score += 100;
+	}
+	else if (amountLine === 2) {
+		inputScore.innerHTML = `${score += 300}`
+
+	}
+	else if (amountLine === 3) {
+		inputScore.innerHTML = `${score += 700}`
+	}
+	else if (amountLine === 4) {
+		inputScore.innerHTML = `${score += 1500}`
+	}
+}
