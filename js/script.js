@@ -1,4 +1,5 @@
 const board = document.querySelector('.tetris__board');
+const boadNextFigure = document.querySelector('.tetris__figure')
 const inputLevel = document.querySelector('.tetris__level');
 const inputLines = document.querySelector('.tetris__lines');
 const inputScore = document.querySelector('.tetris__score');
@@ -8,7 +9,8 @@ const right = document.getElementById('right');
 const rotateRight = document.getElementById('rotate');
 const btnStart = document.querySelector('.tetris__start');
 const btnPause = document.querySelector('.tetris__pause');
-let amountLine;
+let amountLine
+const brick = {};
 let level = 1;
 let lines = 0;
 let score = 0;
@@ -22,7 +24,7 @@ const bricks = [
 			[0, 0, 0, 0],
 		],
 		y: 0,
-		x: 3,
+		x: 0,
 	},
 
 	{
@@ -32,7 +34,7 @@ const bricks = [
 			[0, 0, 0],
 		],
 		y: 0,
-		x: 4,
+		x: 1,
 	},
 
 	{
@@ -42,7 +44,7 @@ const bricks = [
 			[0, 0, 0],
 		],
 		y: 0,
-		x: 3,
+		x: 1,
 	},
 
 	{
@@ -51,7 +53,7 @@ const bricks = [
 			[1, 1],
 		],
 		y: 0,
-		x: 4,
+		x: 1,
 	},
 
 	{
@@ -61,7 +63,7 @@ const bricks = [
 			[0, 0, 0],
 		],
 		y: 0,
-		x: 3,
+		x: 1,
 	},
 
 	{
@@ -71,7 +73,7 @@ const bricks = [
 			[0, 0, 0],
 		],
 		y: 0,
-		x: 4,
+		x: 1,
 	},
 
 	{
@@ -81,7 +83,7 @@ const bricks = [
 			[0, 0, 0],
 		],
 		y: 0,
-		x: 4,
+		x: 1,
 	},
 ];
 
@@ -108,7 +110,15 @@ const state = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
 ]
 
-const brick = {
+const stateNextBrick = [
+	[0, 0, 0, 0],
+	[0, 0, 0, 0],
+	[0, 0, 0, 0],
+	[0, 0, 0, 0],
+
+]
+
+const defaultBrick = {
 	state: [
 		[0, 0, 2],
 		[2, 2, 2],
@@ -121,9 +131,11 @@ const brick = {
 btnStart.onclick = start;
 
 function start() {
+	copyNewbrick();
 	inputLevel.innerHTML = level;
 	tick();
 	render();
+	showNextBrick();
 }
 
 function pause() {
@@ -167,6 +179,23 @@ function render() {
 
 }
 
+function renderNextBrick() {
+	stateNextBrick.forEach((row, y) => row.forEach((i, x) => {
+		boadNextFigure.rows[y].cells[x].className = colors[i]
+	}))
+
+	defaultBrick.state.forEach((row, y) => row.forEach((i, x) => {
+		if (i) boadNextFigure.rows[y + defaultBrick.y].cells[x + defaultBrick.x].className = colors[i]
+	}))
+
+}
+
+function showNextBrick() {
+	getNewBrick();
+	renderNextBrick();
+}
+
+
 function tick() {
 	brick.y++;
 
@@ -175,7 +204,6 @@ function tick() {
 		stopBrick();
 		cleanLine(state);
 		finishGame(state);
-		getNewBrick();
 	}
 	render();
 	setTimeout(tick, 1000);
@@ -205,10 +233,16 @@ function stopBrick() {
 	brick.state.forEach((row, y) => row.forEach((i, x) => {
 		if (i) state[y + brick.y][x + brick.x] = i;
 	}))
+	copyNewbrick();
+	showNextBrick();
 }
 
 function getNewBrick() {
-	Object.assign(brick, bricks[random(bricks.length)])
+	Object.assign(defaultBrick, bricks[random(bricks.length)])
+
+}
+function copyNewbrick() {
+	Object.assign(brick, defaultBrick)
 
 }
 

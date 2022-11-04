@@ -68,6 +68,15 @@ body {
 .tetris__figure {
 	flex: 0 1 20%;
 	border: 1px solid #bbb;
+	border-collapse: collapse;
+
+}
+
+.tetris__figure td {
+	border: 1px solid #bbb;
+	width: 1vh;
+	height: 1vh;
+
 }
 
 .tetris__date {

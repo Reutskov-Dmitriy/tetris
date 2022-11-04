@@ -17,11 +17,11 @@
 </head>
 
 <body>
-	<div class="finish-game">
-		<p class="finish-game__title">
+	<div class="finish-modal">
+		<p class="finish-modal__title">
 			Game Over
 		</p>
-		n
+		<button class="finish-modal__btn">Start</button>
 	</div>
 	<div class="tetris__row">
 		<table class="tetris__board">
@@ -35,7 +35,14 @@
 		</table>
 		<fieldset class="tetris__info">
 			<div class="tetris__column">
-				<figure class="tetris__figure"></figure>
+				<table class="tetris__figure">
+					<tbody>
+						<script>
+							document.write(`<tr>${'<td></td>'.repeat(4)}</tr>`.repeat(4));
+							document.currentScript.remove();
+						</script>
+					</tbody>
+				</table>
 				<div class="tetris__date">
 					<label for="tetris__level">level</label> <span class="tetris__level"></span>
 				</div>
