@@ -17,55 +17,61 @@
 </head>
 
 <body>
-	<div class="finish-modal">
-		<p class="finish-modal__title">
-			Game Over
-		</p>
-		<button class="finish-modal__btn">Start</button>
-	</div>
-	<div class="tetris__row">
-		<table class="tetris__board">
-			<tbody>
-				<script>
-					document.write(`<tr>${'<td></td>'.repeat(10)}</tr>`.repeat(20));
-					document.currentScript.remove();
-				</script>
-			</tbody>
-
-		</table>
-		<fieldset class="tetris__info">
-			<div class="tetris__column">
-				<table class="tetris__figure">
-					<tbody>
-						<script>
-							document.write(`<tr>${'<td></td>'.repeat(4)}</tr>`.repeat(4));
-							document.currentScript.remove();
-						</script>
-					</tbody>
-				</table>
-				<div class="tetris__date">
-					<label for="tetris__level">level</label> <span class="tetris__level"></span>
-				</div>
-				<div class="tetris__date">
-					<label for="tetris__lines">lines</label> <span class="tetris__lines"></span>
-				</div>
-				<div class="tetris__date">
-					<label for="tetris__score">score</label> <span class="tetris__score"></span>
-				</div>
-				<div class="tetris__buttons">
-					<button class=" tetris__start btn">start</button>
-					<button class=" tetris__pause btn">pause</button>
-				</div>
-				<h1 class="tetris__title">tetris</h1>
+	<div class="finish-modal modal">
+		<div class="modal__glass js-position">
+			<div class="modal__container">
+				<p class="modal__title">
+					Game Over
+				</p>
+				<button class="modal__btn">New Game</button>
 			</div>
-		</fieldset>
+		</div>
 	</div>
-	<section class="tetris__nav">
-		<button id="left" class="nav__btn btn">left</button>
-		<button id="right" class="nav__btn btn">right</button>
-		<button id="rotate" class="nav__btn btn"> rotate</button>
-		<button id="down" class="nav__btn btn">down</button>
-	</section>
+	<div class="container">
+		<div class="tetris__row">
+			<table class="tetris__board">
+				<tbody>
+					<script>
+						document.write(`<tr>${'<td></td>'.repeat(10)}</tr>`.repeat(20));
+						document.currentScript.remove();
+					</script>
+				</tbody>
+
+			</table>
+			<fieldset class="tetris__info">
+				<div class="tetris__column">
+					<table class="tetris__figure">
+						<tbody>
+							<script>
+								document.write(`<tr>${'<td></td>'.repeat(4)}</tr>`.repeat(4));
+								document.currentScript.remove();
+							</script>
+						</tbody>
+					</table>
+					<div class="tetris__date">
+						<label for="tetris__level">level</label> <span class="tetris__level"></span>
+					</div>
+					<div class="tetris__date">
+						<label for="tetris__lines">lines</label> <span class="tetris__lines"></span>
+					</div>
+					<div class="tetris__date">
+						<label for="tetris__score">score</label> <span class="tetris__score"></span>
+					</div>
+					<div class="tetris__buttons">
+						<button class=" tetris__start btn">start</button>
+						<button class=" tetris__pause btn">pause</button>
+					</div>
+					<h1 class="tetris__title">tetris</h1>
+				</div>
+			</fieldset>
+		</div>
+		<section class="tetris__nav">
+			<button id="left" class="nav__btn btn">left</button>
+			<button id="right" class="nav__btn btn">right</button>
+			<button id="rotate" class="nav__btn btn"> rotate</button>
+			<button id="down" class="nav__btn btn">down</button>
+		</section>
+	</div>
 
 </body>
 

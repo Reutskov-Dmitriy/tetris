@@ -9,7 +9,10 @@ const right = document.getElementById('right');
 const rotateRight = document.getElementById('rotate');
 const btnStart = document.querySelector('.tetris__start');
 const btnPause = document.querySelector('.tetris__pause');
-let amountLine
+const btnModal = document.querySelector('.modal__btn');
+const modal = document.querySelector('.modal__glass');
+let pause = false;
+let amountLine, timerId
 const brick = {};
 let level = 1;
 let lines = 0;
@@ -129,6 +132,9 @@ const defaultBrick = {
 }
 
 btnStart.onclick = start;
+btnModal.onclick = startNewGame;
+btnPause.onclick = pauseGame;
+
 
 function start() {
 	copyNewbrick();
@@ -137,10 +143,25 @@ function start() {
 	render();
 	showNextBrick();
 }
-
-function pause() {
+function startNewGame() {
+	modal.classList.add('js-position')
+	state.forEach((row, y) => row.forEach((i, x) => {
+		board.rows[y].cells[x].className = 'default-bacground'
+	}))
 
 }
+function pauseGame() {
+	pause === false ? pause = true : pause = false;
+}
+
+function finishGame(arr) {
+	if (arr[0].some(x => x > 0)) {
+		modal.classList.remove('js-position');
+		pause = true;
+		clear();
+	}
+}
+
 
 onkeydown = (e) => {
 	if (e.key === 'ArrowLeft') tryMove(-1, 0);
@@ -197,16 +218,24 @@ function showNextBrick() {
 
 
 function tick() {
-	brick.y++;
+	if (!pause) {
 
-	if (doesCollide()) {
-		brick.y--;
-		stopBrick();
-		cleanLine(state);
-		finishGame(state);
+		brick.y++;
+
+		if (doesCollide()) {
+			brick.y--;
+			stopBrick();
+			cleanLine(state);
+			finishGame(state);
+		}
+		render();
+
 	}
-	render();
-	setTimeout(tick, 1000);
+	timerId = setTimeout(tick, 1000);
+}
+
+function clear() {
+	clearTimeout(timerId)
 }
 
 function doesCollide() {
@@ -276,12 +305,6 @@ function rotateArr(arr) {
 	return newArr
 }
 
-function finishGame(arr) {
-	if (arr[0].some(x => x > 0)) {
-		return alert('Game Over')
-
-	}
-}
 
 function cleanLine(arr) {
 	amountLine = 0;

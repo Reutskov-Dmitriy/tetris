@@ -1,8 +1,18 @@
 body {
-	padding: 5vh 0;
 	background-color: #333;
 	color: #bbb;
 	font-family: 'Arial', serif;
+}
+
+.container {
+	max-width: 100%;
+	max-height: 100%;
+	padding: 3vh 3vw;
+
+}
+
+.default-bacground {
+	background-color: "";
 }
 
 .red {
@@ -33,6 +43,48 @@ body {
 	background-color: cyan;
 }
 
+.modal {
+	position: relative;
+}
+
+.modal__container {
+	width: 50vw;
+	height: 30vh;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: rgb(187, 187, 187, 0.8);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	color: crimson;
+	font-size: 1.2rem;
+}
+
+.modal__glass {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgb(187, 187, 187, 0.3);
+
+}
+
+.js-position {
+	top: -100vh;
+
+}
+
+.modal__btn {
+	width: 70px;
+	height: 50px;
+	border-radius: 3px;
+	border: none;
+	color: rgb(32, 129, 240);
+	font-size: 1.2rem;
+
+}
 
 .tetris__row {
 	display: flex;
@@ -73,7 +125,7 @@ body {
 }
 
 .tetris__figure td {
-	border: 1px solid #bbb;
+	/* border: 1px solid #bbb; */
 	width: 1vh;
 	height: 1vh;
 
@@ -156,9 +208,9 @@ body {
 
 }
 
-@media (max-width: 900px) {
-	body {
-		padding: 2vh;
+@media (max-width: 625px) {
+	.container {
+		padding: 2vh 2vw;
 	}
 
 	.tetris__board {
