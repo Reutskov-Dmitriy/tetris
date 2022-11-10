@@ -133,21 +133,25 @@ const defaultBrick = {
 }
 
 btnStart.onclick = start;
-btnModal.onclick = startNewGame;
+btnModal.onclick = reset;
 btnPause.onclick = pauseGame;
 
 
 function start() {
+	pause = false;
 	copyNewbrick();
 	inputLevel.innerHTML = level;
 	tick();
 	render();
 	showNextBrick();
 }
-function startNewGame() {
+function reset() {
 	modal.classList.add('js-position');
+	state.forEach((row) => row.forEach((el, x) => {
+		if (el !== 0) { row[x] = 0; }
+	}))
 	state.forEach((row, y) => row.forEach((i, x) => {
-		board.rows[y].cells[x].className = 'default-bacground'
+		board.rows[y].cells[x].className = colors[i]
 	}))
 
 }
@@ -201,26 +205,10 @@ function checkElement(event) {
 	}
 
 }
-// left.onclick = () => {
-// 	tryMove(-1, 0);
-// }
-// right.onclick = () => {
-// 	tryMove(1, 0);
-// }
-
-// rotateRight.onclick = () => {
-// 	tryRotate();
-// }
-
-// down.onclick = () => {
-// 	tryMove(0, 1);
-// }
-
-
 
 
 function render() {
-	let stateCopy = state.map((row, y) => row.map((i, x) => {
+	state.forEach((row, y) => row.forEach((i, x) => {
 		board.rows[y].cells[x].className = colors[i]
 	}))
 
@@ -261,7 +249,7 @@ function tick() {
 		render();
 
 	}
-	timerId = setTimeout(tick, 1000);
+	timerId = setTimeout(tick, 700);
 }
 
 function clear() {
