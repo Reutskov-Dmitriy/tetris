@@ -7,6 +7,7 @@ const down = document.getElementById('down');
 const left = document.getElementById('left');
 const right = document.getElementById('right');
 const rotateRight = document.getElementById('rotate');
+const tetrisNav = document.querySelector('.tetris__nav')
 const btnStart = document.querySelector('.tetris__start');
 const btnPause = document.querySelector('.tetris__pause');
 const btnModal = document.querySelector('.modal__btn');
@@ -144,14 +145,20 @@ function start() {
 	showNextBrick();
 }
 function startNewGame() {
-	modal.classList.add('js-position')
+	modal.classList.add('js-position');
 	state.forEach((row, y) => row.forEach((i, x) => {
 		board.rows[y].cells[x].className = 'default-bacground'
 	}))
 
 }
 function pauseGame() {
-	pause === false ? pause = true : pause = false;
+	!pause ? (
+		pause = true,
+		btnPause.classList.add('active')
+	) : (
+		pause = false,
+		btnPause.classList.remove('active'))
+
 }
 
 function finishGame(arr) {
@@ -164,33 +171,56 @@ function finishGame(arr) {
 
 
 onkeydown = (e) => {
-	if (e.key === 'ArrowLeft') tryMove(-1, 0);
-	else if (e.key === 'ArrowRight') tryMove(1, 0);
-	else if (e.key === 'ArrowDown') tryMove(0, 1);
-	else if (e.key === ' ' || e.key === 'ArrowUp') tryRotate();
+	if (!pause) {
+
+		if (e.key === 'ArrowLeft') tryMove(-1, 0);
+		else if (e.key === 'ArrowRight') tryMove(1, 0);
+		else if (e.key === 'ArrowDown') tryMove(0, 1);
+		else if (e.key === ' ' || e.key === 'ArrowUp') tryRotate();
+	}
 
 }
 
-left.onclick = () => {
-	tryMove(-1, 0);
-}
-right.onclick = () => {
-	tryMove(1, 0);
-}
+tetrisNav.addEventListener('click', checkElement)
 
-rotateRight.onclick = () => {
-	tryRotate();
-}
+function checkElement(event) {
+	if (!pause) {
 
-down.onclick = () => {
-	tryMove(0, 1);
+		if (event.target.closest('#left')) {
+			tryMove(-1, 0);
+		}
+		else if (event.target.closest('#right')) {
+			tryMove(1, 0);
+		}
+		else if (event.target.closest('#down')) {
+			tryMove(0, 1);
+		}
+		else if (event.target.closest('#rotate')) {
+			tryRotate();
+		}
+	}
+
 }
+// left.onclick = () => {
+// 	tryMove(-1, 0);
+// }
+// right.onclick = () => {
+// 	tryMove(1, 0);
+// }
+
+// rotateRight.onclick = () => {
+// 	tryRotate();
+// }
+
+// down.onclick = () => {
+// 	tryMove(0, 1);
+// }
 
 
 
 
 function render() {
-	state.forEach((row, y) => row.forEach((i, x) => {
+	let stateCopy = state.map((row, y) => row.map((i, x) => {
 		board.rows[y].cells[x].className = colors[i]
 	}))
 
@@ -319,9 +349,8 @@ function cleanLine(arr) {
 	}
 	countingScore();
 	render()
-
-
 }
+
 function sumLines(num) {
 	inputLines.innerHTML = lines += num;
 }

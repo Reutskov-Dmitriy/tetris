@@ -195,7 +195,7 @@ body {
 }
 
 .tetris__nav {
-	margin-top: 2vw;
+	margin-top: 3vh;
 	display: flex;
 	justify-content: center;
 	gap: 3vw;
@@ -206,6 +206,11 @@ body {
 	height: 100%;
 	flex: 0 1 8%;
 
+}
+
+.active {
+	background-color: rgb(32, 129, 240);
+	color: #fff;
 }
 
 @media (max-width: 625px) {
