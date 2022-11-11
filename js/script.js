@@ -12,12 +12,9 @@ const btnStart = document.querySelector('.tetris__start');
 const btnPause = document.querySelector('.tetris__pause');
 const btnModal = document.querySelector('.modal__btn');
 const modal = document.querySelector('.modal__glass');
+let amountLine, timerId, speed, level, lines, score
 let pause = false;
-let amountLine, timerId
 const brick = {};
-let level = 1;
-let lines = 0;
-let score = 0;
 const colors = ['', 'yellow', 'orange', 'red', 'magenta', 'blue', 'cyan', 'green'];
 const bricks = [
 	{
@@ -138,38 +135,46 @@ btnPause.onclick = pauseGame;
 
 
 function start() {
+	speed = 800;
+	level = 0;
+	lines = 0;
+	score = 0;
 	pause = false;
 	copyNewbrick();
-	inputLevel.innerHTML = level;
+	changeLevel();
 	tick();
 	render();
 	showNextBrick();
 }
 function reset() {
 	modal.classList.add('js-position');
-	state.forEach((row) => row.forEach((el, x) => {
+	resetState(state);
+	resetState(stateNextBrick);
+	renderState(state);
+	renderState(stateNextBrick);
+}
+function resetState(arr) {
+	arr.forEach((row) => row.forEach((el, x) => {
 		if (el !== 0) { row[x] = 0; }
 	}))
-	state.forEach((row, y) => row.forEach((i, x) => {
-		board.rows[y].cells[x].className = colors[i]
-	}))
-
 }
 function pauseGame() {
 	!pause ? (
 		pause = true,
+		clearTimeout(timerId),
 		btnPause.classList.add('active')
+
 	) : (
 		pause = false,
+		timerId = setTimeout(tick, speed),
 		btnPause.classList.remove('active'))
-
 }
 
 function finishGame(arr) {
 	if (arr[0].some(x => x > 0)) {
 		modal.classList.remove('js-position');
-		pause = true;
-		clear();
+		clearTimeout(timerId);
+
 	}
 }
 
@@ -208,14 +213,18 @@ function checkElement(event) {
 
 
 function render() {
-	state.forEach((row, y) => row.forEach((i, x) => {
-		board.rows[y].cells[x].className = colors[i]
-	}))
+	renderState(state);
 
 	brick.state.forEach((row, y) => row.forEach((i, x) => {
 		if (i) board.rows[y + brick.y].cells[x + brick.x].className = colors[i]
 	}))
 
+}
+
+function renderState(arr) {
+	arr.forEach((row, y) => row.forEach((i, x) => {
+		board.rows[y].cells[x].className = colors[i]
+	}))
 }
 
 function renderNextBrick() {
@@ -236,6 +245,7 @@ function showNextBrick() {
 
 
 function tick() {
+	console.log("settim")
 	if (!pause) {
 
 		brick.y++;
@@ -249,12 +259,9 @@ function tick() {
 		render();
 
 	}
-	timerId = setTimeout(tick, 700);
+	timerId = setTimeout(tick, speed);
 }
 
-function clear() {
-	clearTimeout(timerId)
-}
 
 function doesCollide() {
 	return brick.state.some((row, y) => row.some((i, x) => {
@@ -332,10 +339,11 @@ function cleanLine(arr) {
 			arr.splice(i, 1) && arr.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
 			amountLine += 1;
 			i = arr.length;
-			sumLines(amountLine)
+			sumLines(amountLine);
+			changeLevel();
 		}
 	}
-	countingScore();
+	inputScore.innerHTML = `${countingScore(amountLine)}`;
 	render()
 }
 
@@ -343,18 +351,35 @@ function sumLines(num) {
 	inputLines.innerHTML = lines += num;
 }
 
-function countingScore() {
-	if (amountLine === 1) {
-		inputScore.innerHTML = score += 100;
-	}
-	else if (amountLine === 2) {
-		inputScore.innerHTML = `${score += 300}`
+function countingScore(amountLine) {
+	const lineClear =
+		amountLine === 1 ?
+			score += 100
+			:
+			amountLine === 2 ?
+				score += 300
+				:
+				amountLine === 3 ?
+					score += 700
+					:
+					amountLine === 4 ?
+						score += 1500
+						:
+						score += 0;
 
+	return (level + 1) * lineClear
+}
+
+function changeLevel() {
+
+	if (lines > 10 || amountLine === 4) {
+		level += 1;
+		changeSpeedBrick();
+		lines = 0;
 	}
-	else if (amountLine === 3) {
-		inputScore.innerHTML = `${score += 700}`
-	}
-	else if (amountLine === 4) {
-		inputScore.innerHTML = `${score += 1500}`
-	}
+	inputLevel.innerHTML = level;
+}
+
+function changeSpeedBrick() {
+	speed -= 80;
 }
