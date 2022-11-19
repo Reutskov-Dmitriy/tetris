@@ -14,6 +14,7 @@ const btnModal = document.querySelector('.modal__btn');
 const modal = document.querySelector('.modal__glass');
 let amountLine, timerId, speed, level, lines, score
 let pause = false;
+let finish = false;
 const brick = {};
 const colors = ['', 'yellow', 'orange', 'red', 'magenta', 'blue', 'cyan', 'green'];
 const bricks = [
@@ -150,8 +151,8 @@ function reset() {
 	modal.classList.add('js-position');
 	resetState(state);
 	resetState(stateNextBrick);
-	renderState(state);
-	renderState(stateNextBrick);
+	renderState(state, board);
+	renderState(stateNextBrick, boadNextFigure);
 }
 function resetState(arr) {
 	arr.forEach((row) => row.forEach((el, x) => {
@@ -171,9 +172,11 @@ function pauseGame() {
 }
 
 function finishGame(arr) {
+
 	if (arr[0].some(x => x > 0)) {
 		modal.classList.remove('js-position');
 		clearTimeout(timerId);
+		finish = true;
 
 	}
 }
@@ -213,7 +216,7 @@ function checkElement(event) {
 
 
 function render() {
-	renderState(state);
+	renderState(state, board);
 
 	brick.state.forEach((row, y) => row.forEach((i, x) => {
 		if (i) board.rows[y + brick.y].cells[x + brick.x].className = colors[i]
@@ -221,16 +224,14 @@ function render() {
 
 }
 
-function renderState(arr) {
+function renderState(arr, board) {
 	arr.forEach((row, y) => row.forEach((i, x) => {
 		board.rows[y].cells[x].className = colors[i]
 	}))
 }
 
 function renderNextBrick() {
-	stateNextBrick.forEach((row, y) => row.forEach((i, x) => {
-		boadNextFigure.rows[y].cells[x].className = colors[i]
-	}))
+	renderState(stateNextBrick, boadNextFigure)
 
 	defaultBrick.state.forEach((row, y) => row.forEach((i, x) => {
 		if (i) boadNextFigure.rows[y + defaultBrick.y].cells[x + defaultBrick.x].className = colors[i]
@@ -245,8 +246,7 @@ function showNextBrick() {
 
 
 function tick() {
-	console.log("settim")
-	if (!pause) {
+	if (!pause && !finish) {
 
 		brick.y++;
 

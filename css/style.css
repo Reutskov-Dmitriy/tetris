@@ -122,7 +122,6 @@ body {
 }
 
 .tetris__figure td {
-	/* border: 1px solid #bbb; */
 	width: 1vh;
 	height: 1vh;
 
