@@ -111,20 +111,20 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-
 }
 
 .tetris__figure {
-	flex: 0 1 20%;
+	/* flex: 0 1 20%; */
+	margin: 0 auto;
+	width: 96px;
+	height: 96px;
 	border: 1px solid #bbb;
 	border-collapse: collapse;
-
 }
 
 .tetris__figure td {
 	width: 1vh;
 	height: 1vh;
-
 }
 
 .tetris__date {
@@ -132,21 +132,16 @@ body {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	font-size: 2rem;
+	font-size: 1.2rem;
 }
 
-.tetris__date input {
-	height: 50%;
-	width: 40%;
-	font-size: 1.5rem;
-}
 
 .tetris__date span {
 	display: inline-block;
 	padding: 5px;
 	height: 50%;
-	width: 40%;
-	font-size: 1rem;
+	width: 60%;
+	font-size: 0.8rem;
 	color: #333;
 	background-color: white;
 }
@@ -157,7 +152,6 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	flex: 0 1 15%;
-
 }
 
 .tetris__buttons button {
@@ -174,7 +168,6 @@ body {
 	border-radius: 1vw;
 	border: none;
 	transition: 1s;
-
 }
 
 .btn:hover {
@@ -218,10 +211,16 @@ body {
 		flex: 0 1 60%;
 	}
 
-	.tetris__date input {
-		height: 50%;
-		width: 50%;
+	.tetris__date {
 		font-size: 1rem;
+		display: block;
+	}
+
+	.tetris__date span {
+		display: block;
+		margin-top: 1vh;
+		width: 100%;
+
 	}
 
 
@@ -244,10 +243,7 @@ body {
 		font-size: 1rem;
 	}
 
-	.tetris__date {
-		flex: 0 1 10%;
-		font-size: 1rem;
-	}
+
 
 	.tetris__nav button {
 		height: 100%;
